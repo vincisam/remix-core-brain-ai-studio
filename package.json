@@ -58,5 +58,13 @@
   "files": [
     "dist"
   ],
-  "main": "dist/server.cjs"
+  "main": "dist/server.cjs",
+  "allowScripts": {
+    "@google/genai": true,
+    "core-js@3.49.0": true,
+    "esbuild@0.28.1": true,
+    "esbuild@0.25.12": true,
+    "protobufjs": true,
+    "sqlite3@5.1.6": true
+  }
 }
