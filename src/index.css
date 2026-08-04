@@ -1,0 +1,107 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-app-bg: var(--app-bg);
+  --color-panel-bg: var(--panel-bg);
+  --color-header-bg: var(--header-bg);
+  --color-card-bg: var(--card-bg);
+  --color-border-color: var(--border-color);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-accent-color: var(--accent-color);
+}
+
+/* Theme Engine Variable Overrides */
+:root {
+  --app-bg: #0f172a;
+  --panel-bg: #1e293b;
+  --header-bg: #0f172a;
+  --card-bg: #334155;
+  --border-color: #334155;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-color: #3b82f6;
+  --accent-glow: rgba(59, 130, 246, 0.25);
+}
+
+/* Light Theme (Sophisticated Default) */
+html.theme-light,
+[data-theme="light"] {
+  --app-bg: #fafafa;
+  --panel-bg: #ffffff;
+  --header-bg: #ffffff;
+  --card-bg: #ffffff;
+  --border-color: #e5e5e5;
+  --text-main: #171717;
+  --text-muted: #737373;
+  --accent-color: #171717;
+  --accent-glow: rgba(23, 23, 23, 0.1);
+}
+
+/* High Contrast Theme Override */
+html.theme-high-contrast,
+[data-theme="high-contrast"] {
+  --app-bg: #000000;
+  --panel-bg: #050505;
+  --header-bg: #000000;
+  --card-bg: #111111;
+  --border-color: #333333;
+  --text-main: #ffffff;
+  --text-muted: #a1a1aa;
+  --accent-color: #facc15;
+  --accent-glow: rgba(250, 204, 21, 0.3);
+}
+
+html.theme-high-contrast body,
+html.theme-light body {
+  background-color: var(--app-bg) !important;
+  color: var(--text-main) !important;
+}
+
+/* Cyberpunk Neon Matrix Theme Override */
+html.theme-cyberpunk,
+[data-theme="cyberpunk"] {
+  --app-bg: #0d021a;
+  --panel-bg: #120426;
+  --header-bg: #0d021a;
+  --card-bg: #1b0738;
+  --border-color: #ff007f40;
+  --text-main: #fdf4ff;
+  --text-muted: #e879f9;
+  --accent-color: #ff007f;
+  --accent-glow: rgba(255, 0, 127, 0.4);
+}
+
+html.theme-cyberpunk body {
+  background-color: var(--app-bg) !important;
+  color: var(--text-main) !important;
+}
+
+/* Smooth transition for theme switching */
+body, nav, div, button, input, textarea {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* Scrollbar utilities */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 9999px;
+}
+
+html.theme-high-contrast .scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #71717a;
+}
+
+html.theme-cyberpunk .scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #ff007f80;
+}

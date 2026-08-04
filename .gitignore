@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env.local
+.npmrc
+tools.sqlite
+uploads/
+.core_brain/
+*.log
+.idea/
+.vscode/
+.DS_Store

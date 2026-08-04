@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  core-brain-api:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      - redis
+    networks:
+      - brain-network
+
+  # Redis for Rate Limiting and Task Queue (Engine 04 async tasks)
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    networks:
+      - brain-network
+    volumes:
+      - redis-data:/data
+
+  # Prometheus for Observability
+  prometheus:
+    image: prom/prometheus:v2.45.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - brain-network
+
+  # Grafana for Monitoring Dashboards
+  grafana:
+    image: grafana/grafana:10.0.3
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=secure_admin_password
+    depends_on:
+      - prometheus
+    networks:
+      - brain-network
+
+networks:
+  brain-network:
+    driver: bridge
+
+volumes:
+  redis-data:

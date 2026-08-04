@@ -1,0 +1,10 @@
+{
+  "name": "Remix CORE_BRAIN AI Studio",
+  "description": "CORE_BRAIN AI Studio build environment featuring Gemini 3.6 Flash code synthesis, AST refactoring, LSP security diagnostics, prompt component auto-routing, and Cloud Run execution.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
