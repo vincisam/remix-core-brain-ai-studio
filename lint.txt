@@ -1,0 +1,26 @@
+
+> react-example@0.0.0 lint
+> tsc --noEmit
+
+src/components/Panels/SelfDevelopmentMatrix.tsx(50,5): error TS2322: Type '"core_brain Sub-System"' is not assignable to type '"LLM Orchestration" | "AST Transformation" | "LSP Diagnostics" | "Swarm Intelligence" | "UI Generation" | "Container Sandbox" | "Vector Synthesis" | "Edge & Ultra-Fast AI" | "Global Frontier LLM" | "Reasoning & Math AI" | "Open Source & Weights"'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(60,40): error TS2304: Cannot find name 'e'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(69,5): error TS2322: Type '"core_brain Sub-System"' is not assignable to type '"LLM Orchestration" | "AST Transformation" | "LSP Diagnostics" | "Swarm Intelligence" | "UI Generation" | "Container Sandbox" | "Vector Synthesis" | "Edge & Ultra-Fast AI" | "Global Frontier LLM" | "Reasoning & Math AI" | "Open Source & Weights"'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(79,40): error TS2304: Cannot find name 'e'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(88,5): error TS2322: Type '"core_brain Sub-System"' is not assignable to type '"LLM Orchestration" | "AST Transformation" | "LSP Diagnostics" | "Swarm Intelligence" | "UI Generation" | "Container Sandbox" | "Vector Synthesis" | "Edge & Ultra-Fast AI" | "Global Frontier LLM" | "Reasoning & Math AI" | "Open Source & Weights"'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(98,40): error TS2304: Cannot find name 'e'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(107,5): error TS2322: Type '"core_brain Sub-System"' is not assignable to type '"LLM Orchestration" | "AST Transformation" | "LSP Diagnostics" | "Swarm Intelligence" | "UI Generation" | "Container Sandbox" | "Vector Synthesis" | "Edge & Ultra-Fast AI" | "Global Frontier LLM" | "Reasoning & Math AI" | "Open Source & Weights"'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(117,40): error TS2304: Cannot find name 'e'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(126,5): error TS2322: Type '"core_brain Sub-System"' is not assignable to type '"LLM Orchestration" | "AST Transformation" | "LSP Diagnostics" | "Swarm Intelligence" | "UI Generation" | "Container Sandbox" | "Vector Synthesis" | "Edge & Ultra-Fast AI" | "Global Frontier LLM" | "Reasoning & Math AI" | "Open Source & Weights"'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(136,40): error TS2304: Cannot find name 'e'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(145,5): error TS2322: Type '"core_brain Sub-System"' is not assignable to type '"LLM Orchestration" | "AST Transformation" | "LSP Diagnostics" | "Swarm Intelligence" | "UI Generation" | "Container Sandbox" | "Vector Synthesis" | "Edge & Ultra-Fast AI" | "Global Frontier LLM" | "Reasoning & Math AI" | "Open Source & Weights"'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(155,40): error TS2304: Cannot find name 'e'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(164,5): error TS2322: Type '"core_brain Sub-System"' is not assignable to type '"LLM Orchestration" | "AST Transformation" | "LSP Diagnostics" | "Swarm Intelligence" | "UI Generation" | "Container Sandbox" | "Vector Synthesis" | "Edge & Ultra-Fast AI" | "Global Frontier LLM" | "Reasoning & Math AI" | "Open Source & Weights"'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(174,40): error TS2304: Cannot find name 'e'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(183,5): error TS2322: Type '"core_brain Sub-System"' is not assignable to type '"LLM Orchestration" | "AST Transformation" | "LSP Diagnostics" | "Swarm Intelligence" | "UI Generation" | "Container Sandbox" | "Vector Synthesis" | "Edge & Ultra-Fast AI" | "Global Frontier LLM" | "Reasoning & Math AI" | "Open Source & Weights"'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(193,40): error TS2304: Cannot find name 'e'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(202,5): error TS2322: Type '"core_brain Sub-System"' is not assignable to type '"LLM Orchestration" | "AST Transformation" | "LSP Diagnostics" | "Swarm Intelligence" | "UI Generation" | "Container Sandbox" | "Vector Synthesis" | "Edge & Ultra-Fast AI" | "Global Frontier LLM" | "Reasoning & Math AI" | "Open Source & Weights"'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(212,40): error TS2304: Cannot find name 'e'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(221,5): error TS2322: Type '"core_brain Sub-System"' is not assignable to type '"LLM Orchestration" | "AST Transformation" | "LSP Diagnostics" | "Swarm Intelligence" | "UI Generation" | "Container Sandbox" | "Vector Synthesis" | "Edge & Ultra-Fast AI" | "Global Frontier LLM" | "Reasoning & Math AI" | "Open Source & Weights"'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(231,40): error TS2304: Cannot find name 'e'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(240,5): error TS2322: Type '"core_brain Sub-System"' is not assignable to type '"LLM Orchestration" | "AST Transformation" | "LSP Diagnostics" | "Swarm Intelligence" | "UI Generation" | "Container Sandbox" | "Vector Synthesis" | "Edge & Ultra-Fast AI" | "Global Frontier LLM" | "Reasoning & Math AI" | "Open Source & Weights"'.
+src/components/Panels/SelfDevelopmentMatrix.tsx(250,40): error TS2304: Cannot find name 'e'.

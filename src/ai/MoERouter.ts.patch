@@ -1,0 +1,11 @@
+--- src/ai/MoERouter.ts
++++ src/ai/MoERouter.ts
+@@ -194,6 +194,8 @@
+     } catch (e) {
+       baseSystemInstruction = "You are core_brain, the central intelligence and orchestrator.";
+     }
++    
++    baseSystemInstruction += `\n\n[Important Tool Limitation]\nThe image generation tool is currently failing with a quota limit error (resource_exhausted). Do not attempt to use image generation tools. If the user asks for images, output a detailed prompt instead so they can run it elsewhere.`;
+ 
+     baseSystemInstruction += `\n\n[Internal Routing Context]\nCurrently engaged sub-system: ${engine} (${domain})`;
+ 

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allowBashCommands": ["npm run build", "npm run lint", "tsc"],
+    "denyBashCommands": ["rm -rf /", "chmod 777"]
+  },
+  "hooks": {
+    "preCommit": ["npm run lint", "npm run test"]
+  },
+  "slashCommands": {
+    "review": "Run the code review skill",
+    "test": "Run the test generation skill"
+  },
+  "environment": {
+    "NODE_ENV": "development"
+  }
+}
