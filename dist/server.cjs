@@ -2552,7 +2552,7 @@ var chat_routes_default = router2;
 // server.ts
 async function startServer() {
   const app = (0, import_express4.default)();
-  const PORT = 3e3;
+  const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3e3;
   app.use((req, res, next) => {
     const keysStr = req.headers["x-custom-api-keys"];
     if (keysStr) {
