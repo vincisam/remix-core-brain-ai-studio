@@ -6,12 +6,20 @@
   "scripts": {
     "postinstall": "node scripts/patch-color-function.cjs",
     "dev": "tsx server.ts",
-    "build": "vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
-    "start": "node dist/server.cjs",
+    "build": "vite build && esbuild server.ts --bundle --platform=node --format=esm --packages=external --sourcemap --outfile=dist/server.mjs",
+    "start": "node dist/server.mjs",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit"
   },
+  "allowScripts": [
+    "sqlite3",
+    "@google/genai",
+    "esbuild",
+    "node",
+    "protobufjs",
+    "core-js"
+  ],
   "dependencies": {
     "@google/genai": "^2.4.0",
     "@monaco-editor/react": "^4.7.0",
@@ -59,5 +67,5 @@
   "files": [
     "dist"
   ],
-  "main": "dist/server.cjs"
+  "main": "dist/server.mjs"
 }

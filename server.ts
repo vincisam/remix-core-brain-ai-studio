@@ -9,6 +9,7 @@ import express from "express";
 import { coreBrainDaemon } from "./src/ai/CoreBrain.js";
 
 import path from "path";
+import { fileURLToPath } from "url";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI, Type } from "@google/genai";
 import { nanoBananaEngine } from "./src/ai/NanoBananaEngine";
@@ -26,16 +27,16 @@ import { mcpRegistry } from "./src/ai/McpServer";
 import authRoutes from "./src/routes/auth.routes";
 import chatRoutes from "./src/routes/chat.routes";
 
-async function startServer() {
+export async function createApp() {
   const app = express();
-  const PORT = 3000;
 
     // Dynamic API Key Injector from Secure Local Storage
   app.use((req, res, next) => {
-    const keysStr = req.headers['x-custom-api-keys'];
+    const headerValue = req.headers['x-custom-api-keys'];
+    const keysStr = Array.isArray(headerValue) ? headerValue[0] : headerValue;
     if (keysStr) {
       try {
-        const keys = JSON.parse(keysStr);
+        const keys = JSON.parse(keysStr as string);
         if (keys.COHERE_API_KEY && coreBrain.engines.cohere) (coreBrain.engines.cohere as any).apiKey = keys.COHERE_API_KEY;
         if (keys.ZHIPU_API_KEY && coreBrain.engines.zaiGlm) (coreBrain.engines.zaiGlm as any).apiKey = keys.ZHIPU_API_KEY;
         if (keys.TENCENT_SECRET_ID && coreBrain.engines.tencentHunyuan) (coreBrain.engines.tencentHunyuan as any).secretId = keys.TENCENT_SECRET_ID;
@@ -865,11 +866,18 @@ Return JSON:
   }
 
   coreBrainDaemon.startSelfBuildProcess("Auto start initialization");
-  const server = app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server listening on http://0.0.0.0:${PORT}`);
-  });
 
-
+  return app;
 }
 
-startServer();
+async function startServer() {
+  const PORT = Number(process.env.PORT || 3000);
+  const app = await createApp();
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server listening on http://0.0.0.0:${PORT}`);
+  });
+}
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  startServer();
+}

@@ -149,6 +149,8 @@ moeRouter.post("/ai/chat", async (req, res) => {
     res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
   };
 
+  let engine: string | undefined = "engine03";
+
   try {
     const ai = getAi();
     
@@ -170,7 +172,6 @@ moeRouter.post("/ai/chat", async (req, res) => {
     
     // Dynamic Routing Optimization (DRO)
     const dol = DynamicOptimizationLoop.getInstance();
-    let engine = "engine03";
     let optimizedTasks = ["engine03"];
     
     if (intent.engineConfidence) {
