@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: remix-core-brain-api
+    env: docker
+    dockerfilePath: Dockerfile
+    branch: main
+    plan: free
+    health_check_path: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
