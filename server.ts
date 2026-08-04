@@ -38,7 +38,7 @@ import chatRoutes from "./src/routes/chat.routes";
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
     // Dynamic API Key Injector from Secure Local Storage
   app.use((req, res, next) => {
