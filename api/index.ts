@@ -1,4 +1,4 @@
-import { createApp } from '../server.ts';
+import { createApp } from '../dist/server.mjs';
 
 let appPromise: Promise<import('express').Express> | null = null;
 
