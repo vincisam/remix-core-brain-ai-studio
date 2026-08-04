@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "allowScripts": ["sqlite3","@google/genai","esbuild","protobufjs","core-js"],
   "scripts": {
     "postinstall": "node scripts/patch-color-function.cjs",
     "dev": "tsx server.ts",
@@ -39,7 +40,6 @@
     "remark-gfm": "^4.0.1",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.6",
-    "vite": "^6.2.3",
     "ws": "^8.21.1"
   },
   "devDependencies": {
