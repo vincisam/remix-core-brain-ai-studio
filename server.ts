@@ -30,6 +30,35 @@ import chatRoutes from "./src/routes/chat.routes";
 export async function createApp() {
   const app = express();
 
+  // CORS middleware — allow the Vercel frontend (and any local dev origin)
+  // to call this API cross-origin. Without this, the browser blocks
+  // login/signup and all /api/* calls with a "Network error".
+  app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    // Allow any origin in production (Render backend, Vercel/any frontend).
+    // In local dev, origin is http://localhost:3000 or http://localhost:5173.
+    if (origin) {
+      res.setHeader("Access-Control-Allow-Origin", origin);
+      res.setHeader("Vary", "Origin");
+    } else {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+    }
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization, X-Custom-Api-Keys, X-Requested-With"
+    );
+    // Handle preflight requests
+    if (req.method === "OPTIONS") {
+      return res.sendStatus(204);
+    }
+    next();
+  });
+
     // Dynamic API Key Injector from Secure Local Storage
   app.use((req, res, next) => {
     const headerValue = req.headers['x-custom-api-keys'];

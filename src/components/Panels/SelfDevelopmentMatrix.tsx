@@ -1,5 +1,6 @@
 import { GLOBAL_AI_COMPONENTS } from "../../ai/GlobalComponents";
 import React, { useState } from "react";
+import { API_BASE } from "../../utils/api";
 import {
   Cpu,
   Bot,
@@ -91,7 +92,7 @@ export const SelfDevelopmentMatrix: React.FC<SelfDevelopmentMatrixProps> = ({
       .filter((p) => p.length > 0);
 
     try {
-      const res = await fetch("/api/ai/core-brain/multi-prompt-search", {
+      const res = await fetch(`${API_BASE}/api/ai/core-brain/multi-prompt-search`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompts: promptsList }),
@@ -124,7 +125,7 @@ export const SelfDevelopmentMatrix: React.FC<SelfDevelopmentMatrixProps> = ({
     setAccuracyResult(null);
 
     try {
-      const res = await fetch("/api/ai/core-brain/predict-accurate", {
+      const res = await fetch(`${API_BASE}/api/ai/core-brain/predict-accurate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: accuracyPromptInput }),
@@ -252,7 +253,7 @@ export const SelfDevelopmentMatrix: React.FC<SelfDevelopmentMatrixProps> = ({
         const res = SelfRepairingUiEngine.auditAndRepair(playgroundPrompt);
         outputText = `[Self-Repairing UI Output]\nRepaired JSX:\n${res.repairedJsx}\nLog:\n${res.repairLog.join("\n") || "No defects detected."}`;
       } else {
-        const response = await fetch("/api/ai/core-brain/synthesize", {
+        const response = await fetch(`${API_BASE}/api/ai/core-brain/synthesize`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ engineId: activeComponent.id, prompt: playgroundPrompt })

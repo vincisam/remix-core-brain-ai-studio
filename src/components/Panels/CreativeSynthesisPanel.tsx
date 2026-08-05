@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Sparkles, Image as ImageIcon, BookOpen, Video, Loader2, Copy, Check } from 'lucide-react';
+import { API_BASE } from '../../utils/api';
 
 export const CreativeSynthesisPanel = () => {
   const [prompt, setPrompt] = useState("");
@@ -16,7 +17,7 @@ export const CreativeSynthesisPanel = () => {
     const systemPrompt = `You are an expert prompt engineer. You are NOT generating an image or video. You are generating TEXT. The user wants you to write a text prompt that they will later use in an image or video generator. \n\nTask: Write a detailed, highly structured, and aesthetically formatted markdown text prompt for ${mode === 'image' ? 'a high-end image generator (like Leonardo.ai)' : mode === 'video' ? 'Google Flow & Gemini Omni Flash AI Video' : 'high-end narrative content'}. \nUser Request: ${prompt}. \n\nCRITICAL RULE: DO NOT apologize. DO NOT say you cannot generate images. You are only writing TEXT. Output the markdown text prompt directly.`;
 
     try {
-      const response = await fetch('/api/ai/chat', {
+      const response = await fetch(`${API_BASE}/api/ai/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

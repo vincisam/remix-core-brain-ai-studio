@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm";
 import { Send, Plus, LogOut, MessageSquare, Trash2, Menu, X } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { CoreBrainLogo } from "../components/UI/CoreBrainLogo";
+import { API_BASE } from "../utils/api";
 
 interface Conversation {
   id: string;
@@ -38,7 +39,7 @@ export default function ChatPage() {
 
   const loadConversations = useCallback(async () => {
     try {
-      const res = await fetch("/api/chat/conversations", { headers: authHeaders() });
+      const res = await fetch(`${API_BASE}/api/chat/conversations`, { headers: authHeaders() });
       const data = await res.json();
       if (data.success) setConversations(data.conversations);
     } catch {
@@ -58,7 +59,7 @@ export default function ChatPage() {
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetch(`/api/chat/conversations/${activeId}/messages`, { headers: authHeaders() });
+        const res = await fetch(`${API_BASE}/api/chat/conversations/${activeId}/messages`, { headers: authHeaders() });
         const data = await res.json();
         if (!cancelled && data.success) setMessages(data.messages);
       } catch {
@@ -90,7 +91,7 @@ export default function ChatPage() {
     setConversations((prev) => prev.filter((c) => c.id !== id));
     if (activeId === id) handleNewChat();
     try {
-      await fetch(`/api/chat/conversations/${id}`, { method: "DELETE", headers: authHeaders() });
+      await fetch(`${API_BASE}/api/chat/conversations/${id}`, { method: "DELETE", headers: authHeaders() });
     } catch {
       loadConversations();
     }
@@ -110,7 +111,7 @@ export default function ChatPage() {
     ]);
 
     try {
-      const res = await fetch("/api/chat/messages", {
+      const res = await fetch(`${API_BASE}/api/chat/messages`, {
         method: "POST",
         headers: authHeaders(),
         body: JSON.stringify({ conversationId: activeId, content }),

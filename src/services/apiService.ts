@@ -1,4 +1,5 @@
 import { getApiHeaders } from '../utils/apiConfig';
+import { API_BASE } from '../utils/api';
 import { RefactorDiff, LSPDiagnostic, LSPSymbol, UnitTestSuite, ExplicableReport, EditorPlugin } from "../types";
 
 export class ApiService {
@@ -12,7 +13,7 @@ export class ApiService {
     filename?: string;
   }): Promise<{ completions: { text: string; label: string; detail?: string }[]; inlineGhostText: string }> {
     try {
-      const res = await fetch("/api/ai/suggest", {
+      const res = await fetch(`${API_BASE}/api/ai/suggest`, {
         method: "POST",
         headers: getApiHeaders(),
         body: JSON.stringify(params),
@@ -48,7 +49,7 @@ export class ApiService {
     filename?: string;
   }): Promise<RefactorDiff> {
     try {
-      const res = await fetch("/api/ai/refactor", {
+      const res = await fetch(`${API_BASE}/api/ai/refactor`, {
         method: "POST",
         headers: getApiHeaders(),
         body: JSON.stringify(params),
@@ -98,7 +99,7 @@ export class ApiService {
     complexityScore: string;
   }> {
     try {
-      const res = await fetch("/api/ai/lsp-analyze", {
+      const res = await fetch(`${API_BASE}/api/ai/lsp-analyze`, {
         method: "POST",
         headers: getApiHeaders(),
         body: JSON.stringify(params),
@@ -164,7 +165,7 @@ export class ApiService {
     filename: string;
   }): Promise<UnitTestSuite> {
     try {
-      const res = await fetch("/api/ai/generate-tests", {
+      const res = await fetch(`${API_BASE}/api/ai/generate-tests`, {
         method: "POST",
         headers: getApiHeaders(),
         body: JSON.stringify(params),
@@ -221,7 +222,7 @@ export class ApiService {
     filename: string;
   }): Promise<ExplicableReport> {
     try {
-      const res = await fetch("/api/ai/explain", {
+      const res = await fetch(`${API_BASE}/api/ai/explain`, {
         method: "POST",
         headers: getApiHeaders(),
         body: JSON.stringify(params),
@@ -259,7 +260,7 @@ export class ApiService {
    */
   static async generatePlugin(prompt: string): Promise<EditorPlugin> {
     try {
-      const res = await fetch("/api/ai/generate-plugin", {
+      const res = await fetch(`${API_BASE}/api/ai/generate-plugin`, {
         method: "POST",
         headers: getApiHeaders(),
         body: JSON.stringify({ prompt }),
@@ -310,7 +311,7 @@ export class ApiService {
     onError: (err: any) => void
   ) {
     try {
-      const res = await fetch("/api/ai/chat", {
+      const res = await fetch(`${API_BASE}/api/ai/chat`, {
         method: "POST",
         headers: getApiHeaders(),
         body: JSON.stringify(params),
@@ -360,7 +361,7 @@ export class ApiService {
     selectedComponent?: any;
   }): Promise<{reply: string; targetPanel?: string}> {
     try {
-      const res = await fetch("/api/ai/chat", {
+      const res = await fetch(`${API_BASE}/api/ai/chat`, {
         method: "POST",
         headers: getApiHeaders(),
         body: JSON.stringify(params),
