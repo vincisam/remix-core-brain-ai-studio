@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Network, Server, Play, ShieldCheck, GitCommit, RefreshCw, Layers, Database, Code, CheckCircle } from 'lucide-react';
 import { simulatePythonExecution } from '../../services/sandbox';
+import { API_BASE } from '../../utils/api';
 
 export const EvolutionDashboard = () => {
   const [activeStage, setActiveStage] = useState<number>(0);
@@ -18,7 +19,7 @@ export const EvolutionDashboard = () => {
     if (isRunning) {
       interval = setInterval(async () => {
         try {
-          const res = await fetch('/api/ai/core_brain/status');
+          const res = await fetch(`${API_BASE}/api/ai/core_brain/status`);
           const data = await res.json();
           setDaemonLogs(data.logs || []);
         } catch(e) {}
@@ -33,7 +34,7 @@ export const EvolutionDashboard = () => {
     setLogs([]);
     
     try {
-      await fetch('/api/ai/core_brain/start', { 
+      await fetch(`${API_BASE}/api/ai/core_brain/start`, { 
         method: 'POST', 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: "Full Stack Component Evolution & Rebuild" })
@@ -83,7 +84,7 @@ export const EvolutionDashboard = () => {
     setTimeout(async () => {
        setIsRunning(false);
        try {
-         await fetch('/api/ai/core_brain/stop', { method: 'POST' });
+         await fetch(`${API_BASE}/api/ai/core_brain/stop`, { method: 'POST' });
        } catch(e) {}
     }, 5000);
   };

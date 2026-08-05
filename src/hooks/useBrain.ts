@@ -1,4 +1,5 @@
 import { getApiHeaders } from '../utils/apiConfig';
+import { API_BASE } from '../utils/api';
 import { useState } from 'react';
 
 export const useBrain = () => {
@@ -10,7 +11,7 @@ export const useBrain = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/v1/brain/dispatch', {
+      const response = await fetch(`${API_BASE}/api/v1/brain/dispatch`, {
         method: 'POST',
         headers: getApiHeaders(),
         body: JSON.stringify({ input: prompt, context: { mode: "auto" } })

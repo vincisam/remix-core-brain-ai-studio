@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Github } from "lucide-react";
+import { API_BASE } from "../../utils/api";
 
 export const OAuthButtons: React.FC = () => {
   const [providers, setProviders] = useState({ google: false, github: false });
 
   useEffect(() => {
-    fetch("/api/auth/oauth/providers")
+    fetch(`${API_BASE}/api/auth/oauth/providers`)
       .then((r) => r.json())
       .then(setProviders)
       .catch(() => {});
@@ -17,7 +18,7 @@ export const OAuthButtons: React.FC = () => {
     <div className="space-y-3 mb-6">
       {providers.github && (
         <a
-          href="/api/auth/oauth/github"
+          href={`${API_BASE}/api/auth/oauth/github`}
           className="w-full flex items-center justify-center space-x-2 bg-card-bg border border-border-color hover:border-accent-color/50 text-text-main py-2.5 rounded-xl font-medium transition group"
         >
           <Github className="w-5 h-5 text-text-muted group-hover:text-text-main transition" />
@@ -26,7 +27,7 @@ export const OAuthButtons: React.FC = () => {
       )}
       {providers.google && (
         <a
-          href="/api/auth/oauth/google"
+          href={`${API_BASE}/api/auth/oauth/google`}
           className="w-full flex items-center justify-center space-x-2 bg-card-bg border border-border-color hover:border-accent-color/50 text-text-main py-2.5 rounded-xl font-medium transition group"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">

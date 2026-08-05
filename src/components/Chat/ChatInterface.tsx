@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { Terminal, Cpu, Code, Globe, ShieldCheck, Paperclip, Send, X, UploadCloud, File } from 'lucide-react';
+import { API_BASE } from '../../utils/api';
 
 export const ChatInterface = () => {
   const [messages, setMessages] = useState<any[]>([
@@ -72,7 +73,7 @@ export const ChatInterface = () => {
     setLogs(prev => [...prev, { id: newLogId, engine: 'core_brain', msg: 'Analyzing intent...', type: 'info' }]);
 
     try {
-      const response = await fetch('/api/ai/chat', {
+      const response = await fetch(`${API_BASE}/api/ai/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: [...messages, userMsg], model: "gemini-3.6-flash" })

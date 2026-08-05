@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { MessageSquare, Zap, Cpu, Search, RefreshCw, Send, Sparkles, Server, Globe, Database, Network, Activity } from 'lucide-react';
+import { API_BASE } from '../../utils/api';
 
 interface Message {
   id: string;
@@ -81,7 +82,7 @@ export const ChatEngineDashboard = () => {
     const doFetch = async () => {
       const startTime = Date.now();
       try {
-        const response = await fetch('/api/ai/chat', {
+        const response = await fetch(`${API_BASE}/api/ai/chat`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
