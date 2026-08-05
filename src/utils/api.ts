@@ -5,9 +5,13 @@
 //
 // Set VITE_API_URL in your Vercel project env vars (or .env.local locally)
 // to point to the deployed backend, e.g. https://remix-core-brain-api.onrender.com
+//
+// In local dev, the backend Express server serves both the API and the
+// frontend (via Vite middleware) on the same origin, so we default to an
+// empty string (relative "/api/*" calls resolve to the current origin).
 import { getApiHeaders } from "./apiConfig";
 
-const API_BASE: string = (import.meta.env.VITE_API_URL as string) || "http://localhost:4321";
+const API_BASE: string = (import.meta.env.VITE_API_URL as string) || "";
 
 export { API_BASE };
 
