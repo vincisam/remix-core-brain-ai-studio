@@ -5,6 +5,8 @@
 //
 // Set VITE_API_URL in your Vercel project env vars (or .env.local locally)
 // to point to the deployed backend, e.g. https://remix-core-brain-api.onrender.com
+import { getApiHeaders } from "./apiConfig";
+
 const API_BASE: string = (import.meta.env.VITE_API_URL as string) || "http://localhost:4321";
 
 export { API_BASE };
@@ -23,6 +25,8 @@ export const buildApiUrl = (path: string): string => {
 
 /**
  * Fetch helper that prefixes the API base URL and handles JSON.
+ * Merges the custom API-key headers from apiConfig so the backend can
+ * inject the user's provider keys (X-Custom-Api-Keys).
  * @param path - The API path, e.g. "/api/ai/chat"
  * @param options - Standard fetch options
  * @returns The parsed JSON response.
@@ -31,7 +35,8 @@ export const apiFetch = async <T = any>(
   path: string,
   options: RequestInit = {}
 ): Promise<T> => {
-  const res = await fetch(buildApiUrl(path), options);
+  const headers = { ...getApiHeaders(), ...(options.headers || {}) };
+  const res = await fetch(buildApiUrl(path), { ...options, headers });
 
   if (!res.ok) {
     let message = `Request failed with status ${res.status}`;
@@ -55,10 +60,11 @@ export const apiFetch = async <T = any>(
 /**
  * Streaming fetch helper for SSE/text-stream endpoints (e.g. chat).
  * Prefixes the API base URL and returns the raw Response so the caller
- * can read the body stream.
+ * can read the body stream. Merges the custom API-key headers.
  */
 export const apiStream = async (path: string, options: RequestInit = {}): Promise<Response> => {
-  const res = await fetch(buildApiUrl(path), options);
+  const headers = { ...getApiHeaders(), ...(options.headers || {}) };
+  const res = await fetch(buildApiUrl(path), { ...options, headers });
   if (!res.ok) {
     let message = `Request failed with status ${res.status}`;
     try {
