@@ -8,15 +8,6 @@ import { moeRouter } from "./src/ai/MoERouter";
 import { ComponentSelector } from "./src/ai/ComponentSelector";
 import express from "express";
 import { coreBrainDaemon } from "./src/ai/CoreBrain.js";
-import { swarmOrchestrator } from "./src/ai/SwarmOrchestrator";
-import { omniFlowEngine } from "./src/ai/OmniFlowEngine";
-import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
-import { handleBrainRequest } from "./src/controllers/brain.controller";
-import { moeRouter } from "./src/ai/MoERouter";
-import { ComponentSelector } from "./src/ai/ComponentSelector";
-import express from "express";
-import { coreBrainDaemon } from "./src/ai/CoreBrain.js";
 
 import path from "path";
 import { createServer as createViteServer } from "vite";
@@ -42,7 +33,8 @@ async function startServer() {
 
     // Dynamic API Key Injector from Secure Local Storage
   app.use((req, res, next) => {
-    const keysStr = req.headers['x-custom-api-keys'];
+    const keysHeader = req.headers['x-custom-api-keys'];
+    const keysStr = Array.isArray(keysHeader) ? keysHeader[0] : keysHeader;
     if (keysStr) {
       try {
         const keys = JSON.parse(keysStr);
@@ -784,7 +776,7 @@ Return JSON:
       const { taskType, prompt } = req.body;
       
       let engineId = "comp-xai-grok";
-      let result = null;
+      let result: any = null;
       let modelName = "";
 
       switch (taskType?.toLowerCase()) {

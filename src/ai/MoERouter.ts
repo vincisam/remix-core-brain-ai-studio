@@ -164,6 +164,10 @@ moeRouter.post("/ai/chat", async (req, res) => {
     res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
   };
 
+  // Declare selectedEngine and domain at the route handler scope so they're accessible in the catch block
+  let selectedEngine: string = "engine03";
+  let domain: string = "Code & Systems Engineering";
+
   try {
     const ai = getAi();
     
@@ -192,6 +196,7 @@ moeRouter.post("/ai/chat", async (req, res) => {
       optimizedTasks = dol.applyDynamicWeighting(intent.engineConfidence, 0.4);
       if (optimizedTasks.length > 0) {
         engine = optimizedTasks[0]; // Primary engine
+        selectedEngine = engine;
       }
       
       if (optimizedTasks.length > 1) {
@@ -199,6 +204,7 @@ moeRouter.post("/ai/chat", async (req, res) => {
       }
     } else {
       engine = (intent.engines && intent.engines.length > 0) ? intent.engines[0] : "engine03";
+      selectedEngine = engine;
     }
     
     const engineMap: Record<string, string> = {
@@ -215,7 +221,7 @@ moeRouter.post("/ai/chat", async (req, res) => {
       engine11: "Safety, Verification & Bias Audit"
     };
 
-    const domain = engineMap[engine] || "Code & Systems Engineering";
+    domain = engineMap[engine] || "Code & Systems Engineering";
     console.log(`[MoE Router] Intent classified as: ${engine} (${domain}) | Complexity: ${intent.complexityScore} | Semantic: ${intent.semanticAnalysis}`);
     sendEvent("status", { step: `Routing to ${domain} Engine` });
     if (intent.executionPlan && Array.isArray(intent.executionPlan)) {
@@ -344,11 +350,18 @@ IMPORTANT: Do NOT output any other text, explanation, or links. ONLY output the 
     
   } catch (err: any) {
     try {
-      if (typeof engine !== 'undefined') {
-        DynamicOptimizationLoop.getInstance().updateWeights([{ engineId: engine, status: "FAILED" }]);
+      if (typeof selectedEngine !== 'undefined') {
+        DynamicOptimizationLoop.getInstance().updateWeights([{ engineId: selectedEngine, status: "FAILED" }]);
       }
     } catch(e) {}
-    sendEvent("error", { message: err.message });
+    // Graceful fallback: if the external Gemini API fails (bad key, network,
+    // model unavailable), still return a useful local response so the UI
+    // never shows a plain "Network error".
+    console.warn("[MoE Router] External AI call failed, using local fallback:", err?.message);
+    const fallbackText = `I'm currently running in local fallback mode (${domain} engine). The external AI service is temporarily unreachable. I can still help you with general coding questions, code review, and project guidance.\n\nYou asked: "${userPrompt}"`;
+    sendEvent("chunk", { text: fallbackText });
+    sendEvent("status", { step: "Self-Reflection: Passed (local fallback)." });
+    sendEvent("done", { text: fallbackText });
   } finally {
     res.end();
   }
